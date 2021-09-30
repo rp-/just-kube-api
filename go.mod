@@ -1,4 +1,4 @@
-module just-kube-api
+module gitlab.at.linbit.com/mwanzenboeck/just-kube-api
 
 go 1.16
 
