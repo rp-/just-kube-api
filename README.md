@@ -1,6 +1,6 @@
 # just-kube-api
 
-Start a local kubernetes control plain. This can be used to test the Kubernetes API without spinning up a full cluster
+Start a local kubernetes control plane. This can be used to test the Kubernetes API without spinning up a full cluster
 
 ## Usage
 
@@ -21,4 +21,4 @@ kube-public       Active   53s
 kube-system       Active   53s
 ```
 
-To stop the control plane again, just interrupt the `go run command`
+To stop the control plane again, just interrupt the `go run ...` command.
