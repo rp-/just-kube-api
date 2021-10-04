@@ -24,7 +24,7 @@ import (
 )
 
 func main() {
-	assetsDir := path.Join(xdg.DataHome(), "just-kube-api")
+	assetsDir := path.Join(xdg.DataDirs()[0], "just-kube-api")
 	apiServerVersion := "v1.22.2"
 	etcdVersion := "v3.5.0"
 	kubeconfigFile := "kubeconfig"
