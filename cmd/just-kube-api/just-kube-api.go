@@ -78,11 +78,18 @@ func main() {
 		log.WithError(err).Fatal("failed to get kubeconfig")
 	}
 
-	err = ioutil.WriteFile(kubeconfigFile, encoded, os.FileMode(0644))
+	userHome, _ := os.UserHomeDir()
+	kubeconfPath := path.Join(userHome, ".kube")
+	err = os.MkdirAll(kubeconfPath, os.FileMode(0755))
+	if err != nil {
+		log.WithError(err).Fatal("failed to write kubeconfig directory")
+	}
+	kubeconfigFilePath := path.Join(kubeconfPath, kubeconfigFile)
+	err = ioutil.WriteFile(kubeconfigFilePath, encoded, os.FileMode(0644))
 	if err != nil {
 		log.WithError(err).Fatal("failed to write kubeconfig")
 	}
-	fmt.Printf("API ready! KubeConfig written to '%s'\n", kubeconfigFile)
+	fmt.Printf("API ready! KubeConfig written to '%s'\n", kubeconfigFilePath)
 
 	<-ctx.Done()
 }
