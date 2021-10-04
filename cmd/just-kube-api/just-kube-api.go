@@ -34,6 +34,8 @@ func main() {
 	flag.StringVar(&apiServerVersion, "apiserver-version", apiServerVersion, "kube-apiserver version to use")
 	flag.StringVar(&etcdVersion, "etcd", etcdVersion, "etcd version to use")
 
+	flag.Parse()
+
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
 
