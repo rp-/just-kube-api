@@ -28,11 +28,13 @@ func main() {
 	apiServerVersion := "v1.22.2"
 	etcdVersion := "v3.5.0"
 	kubeconfigFile := "kubeconfig"
+	bootstrap := false
 
 	flag.StringVar(&assetsDir, "assets-directory", assetsDir, "directory for etcd and kube-apiserver binaries")
 	flag.StringVar(&kubeconfigFile, "kubeconfig-out", kubeconfigFile, "path of kubeconfig written once the cluster is ready")
 	flag.StringVar(&apiServerVersion, "apiserver-version", apiServerVersion, "kube-apiserver version to use")
 	flag.StringVar(&etcdVersion, "etcd", etcdVersion, "etcd version to use")
+	flag.BoolVar(&bootstrap, "bootstrap", bootstrap, "just download binaries and exit")
 
 	flag.Parse()
 
@@ -52,6 +54,10 @@ func main() {
 	err = ensureEtcd(ctx, assetsDir, etcdVersion)
 	if err != nil {
 		log.WithError(err).Fatal("failed to set up etcd")
+	}
+
+	if bootstrap {
+		os.Exit(0)
 	}
 
 	env := &envtest.Environment{
