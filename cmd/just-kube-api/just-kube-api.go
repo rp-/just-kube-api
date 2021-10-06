@@ -19,6 +19,7 @@ import (
 	"strings"
 
 	"github.com/kyoh86/xdg"
+	"github.com/okzk/sdnotify"
 	log "github.com/sirupsen/logrus"
 	"sigs.k8s.io/controller-runtime/pkg/envtest"
 )
@@ -95,8 +96,10 @@ func main() {
 	if err != nil {
 		log.WithError(err).Fatal("failed to write kubeconfig")
 	}
+
 	fmt.Printf("API ready! KubeConfig written to '%s'\n", kubeconfigFilePath)
 
+	sdnotify.Ready()
 	<-ctx.Done()
 }
 
